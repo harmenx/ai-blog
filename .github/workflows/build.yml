@@ -6,7 +6,21 @@ on:
       - main
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./ # optional
+          destination: ./_site # optional
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       pages: write
