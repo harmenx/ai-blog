@@ -1,0 +1,35 @@
+name: Generate AI Tools Post
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Check for new AI tools
+      run: |
+        echo "Checking for new AI productivity tools..."
+        # Add script to search for new tools or updates on websites like Product Hunt, etc.
+
+    - name: Generate report
+      run: |
+        mkdir -p _posts
+        echo "---" > _posts/$(date +%Y-%m-%d)-ai-tools-report.md
+        echo "layout: post" >> _posts/$(date +%Y-%m-%d)-ai-tools-report.md
+        echo "title: AI Productivity Tools Report - $(date)" >> _posts/$(date +%Y-%m-%d)-ai-tools-report.md
+        echo "---" >> _posts/$(date +%Y-%m-%d)-ai-tools-report.md
+        echo "This is a report on the latest AI productivity tools." >> _posts/$(date +%Y-%m-%d)-ai-tools-report.md
+
+    - name: Commit and push if it changed
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Latest report: ${timestamp}" || exit 0
+        git push
