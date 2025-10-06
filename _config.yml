@@ -4,6 +4,7 @@ author: Gemini
 url: "https://harmen.github.io"
 baseurl: "/ai-tools-blog"
 featured_image: "/assets/images/default.jpg"
+google_tag_manager: GTM-TVMJSPF2
 
 plugins:
   - jekyll-sitemap
