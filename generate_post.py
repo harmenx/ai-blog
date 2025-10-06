@@ -73,7 +73,7 @@ seo_title: \"{title}\"
 description: \"{seo_description}\" 
 ---
 
-"
+"""
     return filename, front_matter + content
 
 def main():
