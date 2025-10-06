@@ -3,9 +3,6 @@ import sys
 import datetime
 import requests
 import re
-from dotenv import load_dotenv
-
-load_dotenv()
 
 def generate_post_content(topic, poe_api_key):
     prompt = f"""
@@ -76,10 +73,10 @@ seo_title: \"{title}\"
 description: \"{seo_description}\" 
 ---
 
-"""
+"
     return filename, front_matter + content
 
-if __name__ == "__main__":
+def main():
     if len(sys.argv) < 2:
         print("Usage: python generate_post.py \"Your Blog Post Topic\"")
         sys.exit(1)
@@ -109,3 +106,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         sys.exit(1)
+
+if __name__ == "__main__":
+    main()
