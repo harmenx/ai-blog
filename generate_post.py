@@ -9,17 +9,17 @@ load_dotenv()
 
 def generate_post_content(topic, poe_api_key):
     prompt = f"""
-Generate a high-value, SEO-friendly blog post about "{topic}".
+Generate a high-value, SEO-friendly blog post about the AI tool: "{topic}".
 The post should be approximately 800-1200 words and follow this structure:
 
 1.  **Catchy Title:** A compelling and SEO-optimized title.
-2.  **Introduction:** Hook the reader, briefly introduce the topic, and state what they will learn.
+2.  **Introduction:** Hook the reader, briefly introduce the AI tool, and state what they will learn.
 3.  **Main Body (3-5 sections):
-    *   Each section should cover a specific aspect of the topic.
+    *   Each section should cover a specific aspect of the AI tool (e.g., features, use cases, pricing, comparison to alternatives).
     *   Use clear headings and subheadings (H2, H3).
     *   Provide actionable insights, explanations, and examples.
     *   Incorporate relevant keywords naturally throughout the text.
-4.  **Conclusion:** Summarize key takeaways, offer a final thought, and a call to action.
+4.  **Conclusion:** Summarize key takeaways, offer a final thought, and a call to action (e.g., try the tool, read more).
 5.  **SEO Description:** A concise, compelling summary (around 150-160 characters) for search engines.
 
 Please provide the output in Markdown format.
@@ -46,10 +46,10 @@ def create_jekyll_post(topic, content):
     seo_description = seo_description_match.group(1).strip() if seo_description_match else f"A blog post about {topic}."
 
     categories_match = re.search(r"Categories:\s*\[(.*?)\]", content, re.IGNORECASE)
-    categories = [c.strip() for c in categories_match.group(1).split(',')] if categories_match else ["uncategorized"]
+    categories = [c.strip() for c in categories_match.group(1).split(',')] if categories_match else ["AI Tools"]
 
     tags_match = re.search(r"Tags:\s*\[(.*?)\]", content, re.IGNORECASE)
-    tags = [t.strip() for t in tags_match.group(1).split(',')] if tags_match else ["blog"]
+    tags = [t.strip() for t in tags_match.group(1).split(',')] if tags_match else ["AI"]
 
     # Clean up content by removing the extracted parts
     content = re.sub(r"Catchy Title:.*\n?", "", content, flags=re.IGNORECASE)
