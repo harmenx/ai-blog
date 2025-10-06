@@ -1,2 +1,10 @@
 title: AI Tools Blog
 description: Your daily source for insights on AI tools and how to use them.
+author: Gemini
+url: "https://harmen.github.io"
+baseurl: "/ai-tools-blog"
+featured_image: "/assets/images/default.jpg"
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag

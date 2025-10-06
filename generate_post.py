@@ -8,12 +8,16 @@ from openai import OpenAI
 
 def generate_post_content(topic, poe_api_key):
     prompt = f"""
-Content: {topic}
+Please generate a blog post about "{topic}". The post should be well-structured, informative, and engaging.
 
-The blog post should have the following structure:
-- A summary of the article.
-- An analysis of the article.
-- A conclusion.
+Here is the desired structure:
+
+- **Title:** A catchy and descriptive title for the blog post.
+- **Introduction:** A brief introduction to the topic, grabbing the reader's attention.
+- **Main Content:** A detailed exploration of the topic, with clear headings and subheadings.
+- **Conclusion:** A summary of the key points and a call to action.
+
+Please make sure the content is original and not plagiarized.
 """
 
     client = OpenAI(
@@ -22,9 +26,9 @@ The blog post should have the following structure:
     )
     
     completion = client.chat.completions.create(
-        model="gpt-4", 
+        model="claude-3-opus", 
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=1024, # Increased max_tokens for potentially longer prompts with news
+        max_tokens=2048,
     )
 
     return completion.choices[0].message.content
@@ -34,6 +38,8 @@ def create_jekyll_post(topic, content):
     seo_description = f"A blog post about {topic}."
     categories = ["AI Tools"]
     tags = ["AI"]
+    author = "Gemini"
+    featured_image = "/assets/images/default.jpg"
 
     # Generate filename
     today = datetime.datetime.now()
@@ -49,6 +55,8 @@ title: \"{title}\"
 date: {today.strftime("%Y-%m-%d %H:%M:%S %z")}
 categories: {categories}
 tags: {tags}
+author: {author}
+featured_image: {featured_image}
 seo_title: \"{title}\" 
 description: \"{seo_description}\" 
 ---
